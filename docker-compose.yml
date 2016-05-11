@@ -1,0 +1,4 @@
+splinter:
+  build: .
+  container_name: splinter
+  tty: true

@@ -9,4 +9,5 @@ RUN pip install splinter nose && \
 
 WORKDIR /test/
 
-CMD ["nosetests"]
+#CMD ["nosetests"]
+CMD ["sh"]
