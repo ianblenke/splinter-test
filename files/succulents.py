@@ -4,6 +4,7 @@ import re
 import urlparse
 
 from splinter import Browser
+from selenium import webdriver
 from bs4 import BeautifulSoup
 from time import sleep
 
