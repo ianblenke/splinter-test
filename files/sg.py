@@ -21,38 +21,19 @@ class SucculentScraper(object):
         self.driver.get(link)
 
         succulents = []
-        pageno = 2
 
-        while True:
-            s = BeautifulSoup(self.driver.page_source, "html.parser")
-#https://l3com.taleo.net/careersection/l3_ext_us/jobdetail.ftl?job=081264
-#http://www.succulentguide.com/family_page/?family=Agavaceae
-            r = re.compile(r'\?family=')
-            print "@@@@@@@@@@@"
-            print s
-            sleep(10000)
-            for a in s.findAll('a', href=r):
+        s = BeautifulSoup(self.driver.page_source, "html.parser")
+        r = re.compile(r'\?family=')
+        print "@@@@@@@@@@@"
+        for a in s.findAll('a', href=r):
                 print "AAAAA= %s" % a
-                tr = a.findParent('tr')
-                #print "TR= %s" % tr
-                td = tr.findAll('td')
-                #print "TD= %s" % td
-                #print "END OF A"
+                print a['href']
+                print a.text
+                print "@@@"
                 succulent = {}
                 succulent['title'] = a.text
                 succulent['url'] = urlparse.urljoin(link, a['href'])
-                #succulent['location'] = td[0].text
                 succulents.append(succulent)
-
-#            next_page_elem = self.driver.find_element_by_id('next')
-#            next_page_link = s.find('a', text='%d' % pageno)
-
- #           if next_page_link:
- #               next_page_elem.click()
- #               pageno += 1
- #               sleep(.75)
- #           else:
- #               break
 
         return succulents
 
@@ -73,6 +54,7 @@ class SucculentScraper(object):
     def scrape(self):
         succulents = self.scrape_succulent_links()
         for succulent in succulents:
+            print "SUCCULENTS "
             print succulent
 
         self.driver.quit()
