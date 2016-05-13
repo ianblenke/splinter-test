@@ -36,18 +36,18 @@ class SucculentScraper(object):
                 succulent = {}
                 succulent['title'] = a.text
                 succulent['url'] = urlparse.urljoin(link, a['href'])
-                succulent['location'] = td[2].text
+                succulent['location'] = td[0].text
                 succulents.append(succulent)
 
-            next_page_elem = self.driver.find_element_by_id('next')
-            next_page_link = s.find('a', text='%d' % pageno)
+#            next_page_elem = self.driver.find_element_by_id('next')
+#            next_page_link = s.find('a', text='%d' % pageno)
 
-            if next_page_link:
-                next_page_elem.click()
-                pageno += 1
-                sleep(.75)
-            else:
-                break
+ #           if next_page_link:
+ #               next_page_elem.click()
+ #               pageno += 1
+ #               sleep(.75)
+ #           else:
+ #               break
 
         return succulents
 
@@ -75,3 +75,4 @@ class SucculentScraper(object):
 if __name__ == '__main__':
     scraper = SucculentScraper()
     scraper.scrape()
+
